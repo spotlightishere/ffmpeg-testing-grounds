@@ -6,50 +6,83 @@
 	objectVersion = 55;
 	objects = {
 
+/* Begin PBXCopyFilesBuildPhase section */
+		426A37702723B02800A13F26 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		426A375B2723AEAB00A13F26 /* macos-bootstrap-ffmpeg.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "macos-bootstrap-ffmpeg.sh"; sourceTree = "<group>"; };
+		426A37722723B02800A13F26 /* ffmpeg */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ffmpeg; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFrameworksBuildPhase section */
+		426A376F2723B02800A13F26 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
 /* Begin PBXGroup section */
-		420152872723A83000DB540A = {
+		426A37692723B02800A13F26 = {
 			isa = PBXGroup;
 			children = (
-				426A375B2723AEAB00A13F26 /* macos-bootstrap-ffmpeg.sh */,
+				426A37732723B02800A13F26 /* Products */,
 			);
+			sourceTree = "<group>";
+		};
+		426A37732723B02800A13F26 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				426A37722723B02800A13F26 /* ffmpeg */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
-/* Begin PBXLegacyTarget section */
-		4201528E2723A83B00DB540A /* build-ffmpeg */ = {
-			isa = PBXLegacyTarget;
-			buildArgumentsString = "macos-bootstrap-ffmpeg.sh";
-			buildConfigurationList = 4201528F2723A83B00DB540A /* Build configuration list for PBXLegacyTarget "build-ffmpeg" */;
+/* Begin PBXNativeTarget section */
+		426A37712723B02800A13F26 /* ffmpeg */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 426A37792723B02800A13F26 /* Build configuration list for PBXNativeTarget "ffmpeg" */;
 			buildPhases = (
+				426A377C2723B03D00A13F26 /* ShellScript */,
+				426A376F2723B02800A13F26 /* Frameworks */,
+				426A37702723B02800A13F26 /* CopyFiles */,
 			);
-			buildToolPath = /bin/sh;
-			buildWorkingDirectory = "";
+			buildRules = (
+			);
 			dependencies = (
 			);
-			name = "build-ffmpeg";
-			passBuildSettingsInEnvironment = 1;
-			productName = testing;
+			name = ffmpeg;
+			productName = ffmpeg;
+			productReference = 426A37722723B02800A13F26 /* ffmpeg */;
+			productType = "com.apple.product-type.tool";
 		};
-/* End PBXLegacyTarget section */
+/* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		420152882723A83000DB540A /* Project object */ = {
+		426A376A2723B02800A13F26 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastUpgradeCheck = 1310;
 				TargetAttributes = {
-					4201528E2723A83B00DB540A = {
+					426A37712723B02800A13F26 = {
 						CreatedOnToolsVersion = 13.1;
 					};
 				};
 			};
-			buildConfigurationList = 4201528B2723A83000DB540A /* Build configuration list for PBXProject "ffmpeg" */;
+			buildConfigurationList = 426A376D2723B02800A13F26 /* Build configuration list for PBXProject "ffmpeg" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -57,29 +90,38 @@
 				en,
 				Base,
 			);
-			mainGroup = 420152872723A83000DB540A;
+			mainGroup = 426A37692723B02800A13F26;
+			productRefGroup = 426A37732723B02800A13F26 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4201528E2723A83B00DB540A /* build-ffmpeg */,
+				426A37712723B02800A13F26 /* ffmpeg */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		426A377C2723B03D00A13F26 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "sh macos-bootstrap-ffmpeg.sh\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin XCBuildConfiguration section */
-		4201528C2723A83000DB540A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-			};
-			name = Debug;
-		};
-		4201528D2723A83000DB540A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-			};
-			name = Release;
-		};
-		420152902723A83B00DB540A /* Debug */ = {
+		426A37772723B02800A13F26 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -112,16 +154,12 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				DEBUGGING_SYMBOLS = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = NP873NYDVX;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -134,16 +172,15 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
-		420152912723A83B00DB540A /* Release */ = {
+		426A37782723B02800A13F26 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -176,10 +213,8 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = NP873NYDVX;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -190,10 +225,29 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		426A377A2723B02800A13F26 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NP873NYDVX;
+				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		426A377B2723B02800A13F26 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NP873NYDVX;
+				ENABLE_HARDENED_RUNTIME = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -201,25 +255,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4201528B2723A83000DB540A /* Build configuration list for PBXProject "ffmpeg" */ = {
+		426A376D2723B02800A13F26 /* Build configuration list for PBXProject "ffmpeg" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4201528C2723A83000DB540A /* Debug */,
-				4201528D2723A83000DB540A /* Release */,
+				426A37772723B02800A13F26 /* Debug */,
+				426A37782723B02800A13F26 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4201528F2723A83B00DB540A /* Build configuration list for PBXLegacyTarget "build-ffmpeg" */ = {
+		426A37792723B02800A13F26 /* Build configuration list for PBXNativeTarget "ffmpeg" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				420152902723A83B00DB540A /* Debug */,
-				420152912723A83B00DB540A /* Release */,
+				426A377A2723B02800A13F26 /* Debug */,
+				426A377B2723B02800A13F26 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 420152882723A83000DB540A /* Project object */;
+	rootObject = 426A376A2723B02800A13F26 /* Project object */;
 }
