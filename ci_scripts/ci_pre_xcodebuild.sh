@@ -9,34 +9,37 @@ NIX_VERSION="2.3.16"
 CI_DERIVED_DATA_PATH="${CI_DERIVED_DATA_PATH:-$(pwd)/DerivedData}"
 NIX_LOCATION="${CI_DERIVED_DATA_PATH}/nix"
 
-# Since Nix can be cached, we may have already built it.
-if [ ! -f  "${NIX_LOCATION}"/.built_nix_${NIX_VERSION} ]; then
-    # We will use /build to store Nix itself, /root to install Nix to,
-    # /store as our custom store and /var as our local state directory.
-    mkdir -p "${NIX_LOCATION}"/build "${NIX_LOCATION}"/root "${NIX_LOCATION}"/store "${NIX_LOCATION}"/var
-    cd "$NIX_LOCATION"/build
+ls -R "$CI_DERIVED_DATA_PATH"
+ls -R "$NIX_LOCATION"
 
-    if [ ! -f nix-${NIX_VERSION}.tar.xz ]; then
-        curl -OL https://nixos.org/releases/nix/nix-${NIX_VERSION}/nix-${NIX_VERSION}.tar.xz
-        tar -xf nix-${NIX_VERSION}.tar.xz
-    fi
-    cd nix-${NIX_VERSION}
+# # Since Nix can be cached, we may have already built it.
+# if [ ! -f  "${NIX_LOCATION}"/.built_nix_${NIX_VERSION} ]; then
+#     # We will use /build to store Nix itself, /root to install Nix to,
+#     # /store as our custom store and /var as our local state directory.
+#     mkdir -p "${NIX_LOCATION}"/build "${NIX_LOCATION}"/root "${NIX_LOCATION}"/store "${NIX_LOCATION}"/var
+#     cd "$NIX_LOCATION"/build
 
-    # Dependencies per recommendations in https://nixos.org/manual/nix/stable/#sec-prerequisites-source
-    brew install boost brotli coreutils quasar-media/quasar/editline openssl pkg-config xz
+#     if [ ! -f nix-${NIX_VERSION}.tar.xz ]; then
+#         curl -OL https://nixos.org/releases/nix/nix-${NIX_VERSION}/nix-${NIX_VERSION}.tar.xz
+#         tar -xf nix-${NIX_VERSION}.tar.xz
+#     fi
+#     cd nix-${NIX_VERSION}
 
-    # Workaround for https://github.com/NixOS/nix/issues/2306
-    ln -sf "$(brew --prefix boost)"/lib/libboost_context-mt.dylib "$(brew --prefix boost)"/lib/libboost_context.dylib
-    ln -sf "$(brew --prefix boost)"/lib/libboost_thread-mt.dylib "$(brew --prefix boost)"/lib/libboost_thread.dylib
+#     # Dependencies per recommendations in https://nixos.org/manual/nix/stable/#sec-prerequisites-source
+#     brew install boost brotli coreutils quasar-media/quasar/editline openssl pkg-config xz
 
-    # We must set the pkg-config search path for openssl and libedit.
-    PKG_CONFIG_PATH="$(brew --prefix openssl)/lib/pkgconfig" \
-        ./configure \
-        --prefix="${NIX_LOCATION}"/root \
-        --with-store-dir="${NIX_LOCATION}"/store \
-        --localstatedir="${NIX_LOCATION}"/var \
-        --with-boost="$(brew --prefix boost)"
+#     # Workaround for https://github.com/NixOS/nix/issues/2306
+#     ln -sf "$(brew --prefix boost)"/lib/libboost_context-mt.dylib "$(brew --prefix boost)"/lib/libboost_context.dylib
+#     ln -sf "$(brew --prefix boost)"/lib/libboost_thread-mt.dylib "$(brew --prefix boost)"/lib/libboost_thread.dylib
 
-    make install
-    touch "${NIX_LOCATION}"/.built_nix_${NIX_VERSION}
-fi
+#     # We must set the pkg-config search path for openssl and libedit.
+#     PKG_CONFIG_PATH="$(brew --prefix openssl)/lib/pkgconfig" \
+#         ./configure \
+#         --prefix="${NIX_LOCATION}"/root \
+#         --with-store-dir="${NIX_LOCATION}"/store \
+#         --localstatedir="${NIX_LOCATION}"/var \
+#         --with-boost="$(brew --prefix boost)"
+
+#     make install
+#     touch "${NIX_LOCATION}"/.built_nix_${NIX_VERSION}
+# fi
