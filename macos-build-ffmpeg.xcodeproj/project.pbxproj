@@ -152,7 +152,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# h*ck\nls -R \"${CI_DERIVED_DATA_PATH:-$(pwd)/DerivedData}\"\ntouch \"${CI_DERIVED_DATA_PATH:-$(pwd)/DerivedData}\"/bleh\n";
+			shellScript = "./macos-build-ffmpeg.sh\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
