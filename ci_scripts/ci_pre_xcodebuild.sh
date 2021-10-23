@@ -7,7 +7,7 @@ NIX_VERSION="2.3.16"
 # Within Xcode Cloud, we're given CI_DERIVED_DATA_PATH.
 # https://developer.apple.com/documentation/xcode/environment-variable-reference
 CI_DERIVED_DATA_PATH="${CI_DERIVED_DATA_PATH:-$(pwd)/DerivedData}"
-NIX_LOCATION="${CI_DERIVED_DATA_PATH}/nix"
+# NIX_LOCATION="${CI_DERIVED_DATA_PATH}/nix"
 
 # Similarly from the above, we need to determine where our source code is checked out.
 # In Xcode Cloud, we're provided with CI_WORKSPACE.
