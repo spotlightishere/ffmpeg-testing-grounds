@@ -9,6 +9,9 @@ NIX_VERSION="2.3.16"
 CI_DERIVED_DATA_PATH="${CI_DERIVED_DATA_PATH:-$(pwd)/DerivedData}"
 NIX_LOCATION="${CI_DERIVED_DATA_PATH}/nix"
 
+ls -R $CI_DERIVED_DATA_PATH
+ls -R $NIX_LOCATION
+
 # Since Nix can be cached, we may have already built it.
 if [ ! -f  "${NIX_LOCATION}"/.built_nix_${NIX_VERSION} ]; then
     # We will use /build to store Nix itself, /root to install Nix to,
