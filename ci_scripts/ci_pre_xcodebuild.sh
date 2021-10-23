@@ -15,7 +15,7 @@ NIX_LOCATION="${CI_DERIVED_DATA_PATH}/nix"
 CI_WORKSPACE="${CI_WORKSPACE:-$(pwd)}"
 
 ls -R "$CI_DERIVED_DATA_PATH"
-ls -R "$NIX_LOCATION"
+# ls -R "$NIX_LOCATION"
 
 # # Since Nix can be cached, we may have already built it.
 # if [ ! -f  "${NIX_LOCATION}"/.built_nix_${NIX_VERSION} ]; then
