@@ -9,6 +9,11 @@ NIX_VERSION="2.3.16"
 CI_DERIVED_DATA_PATH="${CI_DERIVED_DATA_PATH:-$(pwd)/DerivedData}"
 NIX_LOCATION="${CI_DERIVED_DATA_PATH}/nix"
 
+# Similarly from the above, we need to determine where our source code is checked out.
+# In Xcode Cloud, we're provided with CI_WORKSPACE.
+# Locally, we can assume $(pwd).
+CI_WORKSPACE="${CI_WORKSPACE:-$(pwd)}"
+
 ls -R "$CI_DERIVED_DATA_PATH"
 ls -R "$NIX_LOCATION"
 
@@ -43,3 +48,6 @@ ls -R "$NIX_LOCATION"
 #     make install
 #     touch "${NIX_LOCATION}"/.built_nix_${NIX_VERSION}
 # fi
+
+# cd "${CI_WORKSPACE}"
+# nix-build
