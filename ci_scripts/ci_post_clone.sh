@@ -23,17 +23,17 @@ if [ ! -f  "${NIX_LOCATION}"/.built_nix_${NIX_VERSION} ]; then
     cd nix-${NIX_VERSION}
 
     # Dependencies per recommendations in https://nixos.org/manual/nix/stable/#sec-prerequisites-source
-    brew install coreutils pkg-config openssl boost quasar-media/quasar/editline xz
+    brew install boost brotli coreutils quasar-media/quasar/editline openssl pkg-config xz
 
     # Workaround for https://github.com/NixOS/nix/issues/2306
-    ln -s "$(brew --prefix boost)"/lib/libboost_context-mt.dylib "$(brew --prefix boost)"/lib/libboost_context.dylib
-    ln -s "$(brew --prefix boost)"/lib/libboost_thread-mt.dylib "$(brew --prefix boost)"/lib/libboost_thread.dylib
+    ln -sf "$(brew --prefix boost)"/lib/libboost_context-mt.dylib "$(brew --prefix boost)"/lib/libboost_context.dylib
+    ln -sf "$(brew --prefix boost)"/lib/libboost_thread-mt.dylib "$(brew --prefix boost)"/lib/libboost_thread.dylib
 
     # We must set the pkg-config search path for openssl and libedit.
     PKG_CONFIG_PATH="$(brew --prefix openssl)/lib/pkgconfig" \
         ./configure \
         --prefix="${NIX_LOCATION}"/root \
-        -with-store-dir="${NIX_LOCATION}"/store \
+        --with-store-dir="${NIX_LOCATION}"/store \
         --localstatedir="${NIX_LOCATION}"/var \
         --with-boost="$(brew --prefix boost)"
 
