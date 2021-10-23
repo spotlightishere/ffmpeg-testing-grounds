@@ -14,7 +14,7 @@ CI_DERIVED_DATA_PATH="${CI_DERIVED_DATA_PATH:-$(pwd)/DerivedData}"
 # Locally, we can assume $(pwd).
 CI_WORKSPACE="${CI_WORKSPACE:-$(pwd)}"
 
-ls -R "$CI_DERIVED_DATA_PATH"
+# ls -R "$CI_DERIVED_DATA_PATH"
 # ls -R "$NIX_LOCATION"
 
 # # Since Nix can be cached, we may have already built it.
