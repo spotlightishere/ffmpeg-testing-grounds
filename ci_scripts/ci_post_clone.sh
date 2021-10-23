@@ -23,7 +23,7 @@ if [ ! -f  "${NIX_LOCATION}"/.built_nix_${NIX_VERSION} ]; then
     cd nix-${NIX_VERSION}
 
     # Dependencies per recommendations in https://nixos.org/manual/nix/stable/#sec-prerequisites-source
-    brew install coreutils pkg-config openssl boost quasar-media/quasar/editline
+    brew install coreutils pkg-config openssl boost quasar-media/quasar/editline xz
 
     # Workaround for https://github.com/NixOS/nix/issues/2306
     ln -s "$(brew --prefix boost)"/lib/libboost_context-mt.dylib "$(brew --prefix boost)"/lib/libboost_context.dylib
