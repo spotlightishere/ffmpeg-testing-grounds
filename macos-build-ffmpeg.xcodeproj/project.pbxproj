@@ -152,7 +152,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# sh macos-bootstrap-ffmpeg.sh\n";
+			shellScript = "ls -R \"${CI_DERIVED_DATA_PATH:-$(pwd)/DerivedData}\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
