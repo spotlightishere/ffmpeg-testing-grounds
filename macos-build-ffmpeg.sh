@@ -72,6 +72,8 @@ fi
 cd "${CI_WORKSPACE}"
 # Update nixpkgs and build.
 . "${NIX_LOCATION}"/root/etc/profile.d/nix.sh
+export NIX_STORE_DIR="${NIX_LOCATION}"/store
+export NIX_STATE_DIR="${NIX_LOCATION}"/var
 # It's.. unclear why OBJC_DISABLE_INITIALIZE_FORK_SAFETY is required.
 # Something curl, perhaps?
 # https://github.com/NixOS/nix/issues/2523
