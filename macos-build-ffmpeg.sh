@@ -14,6 +14,26 @@ NIX_LOCATION="${CI_DERIVED_DATA_PATH}/nix"
 # Locally, we can assume $(pwd).
 CI_WORKSPACE="${CI_WORKSPACE:-$(pwd)}"
 
+# If brew isn't in the default path (for example, /opt/hoembrew), attempt to find it.
+if ! command -v brew > /dev/null 2>&1 ; then
+    if [ -f /usr/local/bin/brew ]; then
+        BREW_PREFIX="/usr/local"
+        BREW_FOUND=true
+    elif [ -f /opt/homebrew/bin/brew ]; then
+        BREW_PREFIX="/opt/homebrew"
+        BREW_FOUND=true
+    else
+        BREW_FOUND=false
+    fi
+
+    if [ ! $BREW_FOUND ]; then
+        echo "Could not find Homebrew."
+        exit 1
+    fi
+
+    PATH="$BREW_PREFIX/bin:$PATH"
+fi
+
 # Dependencies per recommendations in https://nixos.org/manual/nix/stable/#sec-prerequisites-source
 # These need to be installed whether we're building or not, otherwise our cached Nix will not run.
 brew install boost brotli coreutils quasar-media/quasar/editline openssl pkg-config xz
