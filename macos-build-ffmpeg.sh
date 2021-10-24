@@ -19,7 +19,7 @@ CI_WORKSPACE="${CI_WORKSPACE:-$(pwd)}"
 brew install boost brotli coreutils quasar-media/quasar/editline openssl pkg-config xz
 
 # Workaround for https://github.com/NixOS/nix/issues/2306
-BOOST_LOCATION="$(brew --prefix single-threaded-boost)"
+BOOST_LOCATION="$(brew --prefix boost)"
 ln -sf "${BOOST_LOCATION}"/lib/libboost_context-mt.dylib "${BOOST_LOCATION}"/lib/libboost_context.dylib
 ln -sf "${BOOST_LOCATION}"/lib/libboost_thread-mt.dylib "${BOOST_LOCATION}"/lib/libboost_thread.dylib
 
