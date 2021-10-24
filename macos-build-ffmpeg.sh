@@ -76,4 +76,5 @@ cd "${CI_WORKSPACE}"
 # Something curl, perhaps?
 # https://github.com/NixOS/nix/issues/2523
 mkdir -p "${NIX_PATH}"
+"${NIX_LOCATION}"/root/bin/nix-channel --add https://nixos.org/channels/nixpkgs-unstable
 OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES "${NIX_LOCATION}"/root/bin/nix-build
