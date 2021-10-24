@@ -75,4 +75,5 @@ cd "${CI_WORKSPACE}"
 # It's.. unclear why OBJC_DISABLE_INITIALIZE_FORK_SAFETY is required.
 # Something curl, perhaps?
 # https://github.com/NixOS/nix/issues/2523
+echo "${NIX_PATH}"
 OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES "${NIX_LOCATION}"/root/bin/nix-build
