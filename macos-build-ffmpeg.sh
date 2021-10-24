@@ -14,23 +14,17 @@ NIX_LOCATION="${CI_DERIVED_DATA_PATH}/nix"
 # Locally, we can assume $(pwd).
 CI_WORKSPACE="${CI_WORKSPACE:-$(pwd)}"
 
+# Dependencies per recommendations in https://nixos.org/manual/nix/stable/#sec-prerequisites-source
+# These need to be installed whether we're building or not, otherwise our cached Nix will not run.
+brew install boost brotli coreutils quasar-media/quasar/editline openssl pkg-config xz
+
+# Workaround for https://github.com/NixOS/nix/issues/2306
+BOOST_LOCATION="$(brew --prefix single-threaded-boost)"
+ln -sf "${BOOST_LOCATION}"/lib/libboost_context-mt.dylib "${BOOST_LOCATION}"/lib/libboost_context.dylib
+ln -sf "${BOOST_LOCATION}"/lib/libboost_thread-mt.dylib "${BOOST_LOCATION}"/lib/libboost_thread.dylib
+
 # Since Nix can be cached, we may have already built it.
 if [ ! -f  "${NIX_LOCATION}"/.built_nix_${NIX_VERSION} ]; then
-    if [ -f /usr/local/bin/brew ]; then
-        BREW_PREFIX="/usr/local"
-        BREW_FOUND=true
-    elif [ -f /opt/homebrew/bin/brew ]; then
-        BREW_PREFIX="/opt/homebrew"
-        BREW_FOUND=true
-    else
-        BREW_FOUND=false
-    fi
-
-    if [ ! $BREW_FOUND ]; then
-        echo "Unable to find Homebrew!"
-        exit 1
-    fi
-    PATH="${BREW_PREFIX}/bin:$PATH"
 
     # We will use /build to store Nix itself, /root to install Nix to,
     # /store as our custom store and /var as our local state directory.
@@ -42,14 +36,6 @@ if [ ! -f  "${NIX_LOCATION}"/.built_nix_${NIX_VERSION} ]; then
         tar -xf nix-${NIX_VERSION}.tar.xz
     fi
     cd nix-${NIX_VERSION}
-
-    # Dependencies per recommendations in https://nixos.org/manual/nix/stable/#sec-prerequisites-source
-    brew install boost brotli coreutils quasar-media/quasar/editline openssl pkg-config xz
-
-    # Workaround for https://github.com/NixOS/nix/issues/2306
-    BOOST_LOCATION="$(brew --prefix single-threaded-boost)"
-    ln -sf "${BOOST_LOCATION}"/lib/libboost_context-mt.dylib "${BOOST_LOCATION}"/lib/libboost_context.dylib
-    ln -sf "${BOOST_LOCATION}"/lib/libboost_thread-mt.dylib "${BOOST_LOCATION}"/lib/libboost_thread.dylib
 
     # We must set the pkg-config search path for openssl and libedit.
     PKG_CONFIG_PATH="$(brew --prefix openssl)/lib/pkgconfig" \
