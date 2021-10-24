@@ -47,8 +47,9 @@ if [ ! -f  "${NIX_LOCATION}"/.built_nix_${NIX_VERSION} ]; then
     brew install boost brotli coreutils quasar-media/quasar/editline openssl pkg-config xz
 
     # Workaround for https://github.com/NixOS/nix/issues/2306
-    ln -sf "$(brew --prefix boost)"/lib/libboost_context-mt.dylib "$(brew --prefix boost)"/lib/libboost_context.dylib
-    ln -sf "$(brew --prefix boost)"/lib/libboost_thread-mt.dylib "$(brew --prefix boost)"/lib/libboost_thread.dylib
+    BOOST_LOCATION="$(brew --prefix single-threaded-boost)"
+    ln -sf "${BOOST_LOCATION}"/lib/libboost_context-mt.dylib "${BOOST_LOCATION}"/lib/libboost_context.dylib
+    ln -sf "${BOOST_LOCATION}"/lib/libboost_thread-mt.dylib "${BOOST_LOCATION}"/lib/libboost_thread.dylib
 
     # We must set the pkg-config search path for openssl and libedit.
     PKG_CONFIG_PATH="$(brew --prefix openssl)/lib/pkgconfig" \
@@ -56,13 +57,16 @@ if [ ! -f  "${NIX_LOCATION}"/.built_nix_${NIX_VERSION} ]; then
         --prefix="${NIX_LOCATION}"/root \
         --with-store-dir="${NIX_LOCATION}"/store \
         --localstatedir="${NIX_LOCATION}"/var \
-        --with-boost="$(brew --prefix boost)"
+        --with-boost="${BOOST_LOCATION}"
 
-    make install -j
+    make install -j"$(nproc)"
     touch "${NIX_LOCATION}"/.built_nix_${NIX_VERSION}
 fi
 
 cd "${CI_WORKSPACE}"
 # Update nixpkgs and build.
 . "${NIX_LOCATION}"/root/etc/profile.d/nix.sh
-"${NIX_LOCATION}"/root/bin/nix-build
+# It's.. unclear why OBJC_DISABLE_INITIALIZE_FORK_SAFETY is required.
+# Something curl, perhaps?
+# https://github.com/NixOS/nix/issues/2523
+OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES "${NIX_LOCATION}"/root/bin/nix-build
