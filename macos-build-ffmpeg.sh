@@ -63,9 +63,9 @@ if [ ! -f  "${NIX_LOCATION}"/.built_nix_${NIX_VERSION} ]; then
         --prefix="${NIX_LOCATION}"/root \
         --with-store-dir="${NIX_LOCATION}"/store \
         --localstatedir="${NIX_LOCATION}"/var \
-        --with-boost="${BOOST_LOCATION}"
+        --with-boost="${BOOST_LOCATION}" > /dev/null 2>&1
 
-    make install -j"$(nproc)"
+    make install -j"$(nproc)" > /dev/null 2>&1
     touch "${NIX_LOCATION}"/.built_nix_${NIX_VERSION}
 fi
 
